@@ -5,7 +5,7 @@ static void invoke_logger(uint8_t level, ...)
   va_list ap;
   va_start(ap, level);
 
-  log2_generic(level, "%s", ap);
+  log_generic(level, "%s", ap);
 
   va_end(ap);
 }
