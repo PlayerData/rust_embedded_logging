@@ -12,7 +12,7 @@ use log::Level;
 mod write_to;
 
 #[cfg(feature = "embedded-logging")]
-#[link(name = "app")]
+#[cfg_attr(feature="embedded-logging", link(name = "app"))]
 extern "C" {
     // u8 is a lie but same binary definition
     pub fn embedded_logging_log(level: u8, message: *const u8);
