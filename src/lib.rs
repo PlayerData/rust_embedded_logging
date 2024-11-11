@@ -1,6 +1,6 @@
 #![no_std]
 
-use log::{Metadata, Record, SetLoggerError};
+use log::{Metadata, Record};
 
 #[cfg(feature = "std")]
 extern crate std;
@@ -58,7 +58,8 @@ impl log::Log for EmbeddedLogger {
 
 static LOGGER: EmbeddedLogger = EmbeddedLogger;
 
-pub fn init_logger() -> Result<(), SetLoggerError> {
+#[no_mangle]
+pub unsafe extern "C" fn rust_init_logger() {
     log::set_max_level(log::LevelFilter::Debug);
-    log::set_logger(&LOGGER)
+    log::set_logger(&LOGGER).unwrap();
 }
